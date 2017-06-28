@@ -1,47 +1,43 @@
-﻿namespace Lab
+﻿using System;
+
+public class BankAccount
 {
-    using System;
+    private double balance;
+    private int id;
 
-    public class BankAccount
+    public int ID
     {
-        private double balance;
-        private int id;
+        get { return id; }
+        set { id = value; }
+    }
 
-        public int ID
+    public double Balance
+    {
+        get { return balance; }
+        set
         {
-            get { return id; }
-            set { id = value; }
-        }
-
-        public double Balance
-        {
-            get { return balance; }
-            set
+            if (value < 0)
             {
-                if (value < 0)
-                {
-                    throw new ArgumentException("Tha balance can not be negative!");
-                }
-                balance = value;
+                throw new ArgumentException("Tha balance can not be negative!");
             }
-        }
-
-        public void Deposit(Double amount)
-        {
-            this.Balance += amount;
-        }
-
-        public void Withdraw(Double amount)
-        {
-            this.Balance -= amount;
-        }
-
-        public override string ToString()
-        {
-            return $"Account ID{this.id}, balance {this.balance:f2}";
+            balance = value;
         }
     }
 
+    public void Deposit(Double amount)
+    {
+        this.Balance += amount;
+    }
+
+    public void Withdraw(Double amount)
+    {
+        this.Balance -= amount;
+    }
+
+    public override string ToString()
+    {
+        return $"Account ID{this.id}, balance {this.balance:f2}";
+    }
 }
 
 
