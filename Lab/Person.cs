@@ -3,23 +3,36 @@ using System.Linq;
 
 public class Person
 {
-    private string name;
-    private int age;
-    private List<BankAccount> accounts;
+    public string name;
+    public int age;
+
+    public Person()
+        :this("No name", 1)
+    {
+        
+    }
+
+    public Person(int age)
+        :this("No name", age)
+    {
+        
+    }
 
     public Person(string name, int age)
-        : this(name, age, new List<BankAccount>())
-    { }
-
-    public Person(string name, int age, List<BankAccount> accounts)
     {
         this.name = name;
         this.age = age;
-        this.accounts = accounts;
     }
 
-    public double GetBalance()
+    public string Name
     {
-        return this.accounts.Select(a => a.Balance).Sum();
+        get { return name; }
     }
+
+    public int Age
+    {
+        get { return age; }
+    }
+
+
 }
