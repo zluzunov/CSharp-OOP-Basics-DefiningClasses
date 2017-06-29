@@ -6,31 +6,27 @@ public class Program
 {
     static void Main()
     {
-        Type personType = typeof(Person);
-        ConstructorInfo emptyCtor = personType.GetConstructor(new Type[] { });
-        ConstructorInfo ageCtor = personType.GetConstructor(new[] { typeof(int) });
-        ConstructorInfo nameAgeCtor = personType.GetConstructor(new[] { typeof(string), typeof(int) });
-
-        bool swapped = false;
-        if (nameAgeCtor == null)
+        MethodInfo oldestMemberMethod = typeof(Family).GetMethod("GetOldestMember");
+        MethodInfo addMemberMethod = typeof(Family).GetMethod("AddMember");
+        if (oldestMemberMethod == null || addMemberMethod == null)
         {
-            nameAgeCtor = personType.GetConstructor(new[] { typeof(int), typeof(string) });
-            swapped = true;
+            throw new Exception();
         }
 
-        string name = Console.ReadLine();
-        int age = int.Parse(Console.ReadLine());
+        Family family = new Family();
 
-        Person basePerson = (Person)emptyCtor.Invoke(new object[] { });
-        Person personWithAge = (Person)ageCtor.Invoke(new object[] { age });
-        Person personWithAgeAndName = swapped
-            ? (Person)nameAgeCtor.Invoke(new object[] { age, name })
-            : (Person)nameAgeCtor.Invoke(new object[] { name, age });
+        int people = int.Parse(Console.ReadLine());
 
-        Console.WriteLine($"{basePerson.name} {basePerson.age}");
-        Console.WriteLine($"{personWithAge.name} {personWithAge.age}");
-        Console.WriteLine($"{personWithAgeAndName.name} {personWithAgeAndName.age}");
+        for (int i = 0; i < people; i++)
+        {
+            var input = Console.ReadLine().Split(new []{' '},StringSplitOptions.RemoveEmptyEntries);
+            Person person = new Person(input[0], int.Parse(input[1]));
+            family.AddMember(person);
+        }
 
+        Person oldest = family.GetOldestMember();
+
+        Console.WriteLine($"{oldest.name} {oldest.age}");
     }
 }
 
