@@ -4,17 +4,21 @@ public class Program
 {
     static void Main()
     {
-        Company company = new Company();
+        CarPark carPark = new CarPark();
 
-        int employess = int.Parse(Console.ReadLine());
+        int cars = int.Parse(Console.ReadLine());
 
-        for (int i = 0; i < employess; i++)
+        for (int i = 0; i < cars; i++)
         {
-            company.AddMember(Console.ReadLine());
+            carPark.AddCar(new Car(Console.ReadLine()));
+        }
+        string track;
+        while ((track = Console.ReadLine())!= "End")
+        {
+            carPark.Drive(track);
         }
 
-        string topDepartment = company.GetTopDepartmentBySalary();
-        company.PrintDepartment(topDepartment, "Highest Average Salary");
+        carPark.PrintCas();
 
     }
 }
