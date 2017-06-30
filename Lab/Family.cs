@@ -3,23 +3,23 @@ using System.Linq;
 
 class Family
 {
-    protected List<Person> familyMembers;
+    protected List<Person> members;
 
     public Family()
     {
-        familyMembers = new List<Person>();
+        members = new List<Person>();
     }
 
     public void AddMember(Person person)
     {
-        familyMembers.Add(person);
+        members.Add(person);
     }
 
     public Person GetOldestMember()
     {
-        int oldesAge = familyMembers.Select(p => p.age).Max();
+        int oldesAge = members.Select(p => p.age).Max();
 
-        return familyMembers.FirstOrDefault(p => p.age == oldesAge);
+        return members.FirstOrDefault(p => p.age == oldesAge);
     }
 
 }

@@ -5,7 +5,7 @@ class OpinionPoll: Family
 {
     public Person[] GetPersonsOlderThan(int age)
     {
-        var filtered = familyMembers
+        var filtered = members
             .Where(p => p.age > age)
             .OrderBy(p => p.name)
             .ToArray();

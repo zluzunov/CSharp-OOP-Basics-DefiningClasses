@@ -8,7 +8,7 @@ public class Person
     public int age;
 
     public Person()
-        :this("No name", 1)
+        :this("No name", -1)
     {
         
     }
@@ -17,6 +17,12 @@ public class Person
         :this("No name", age)
     {
         
+    }
+
+    public Person(string name)
+        : this(name, 0)
+    {
+
     }
 
     public Person(string name, int age)

@@ -1,17 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Reflection;
 
 public class Program
 {
     static void Main()
     {
-        string date1 = Console.ReadLine();
-        string date2 = Console.ReadLine();
+        Company company = new Company();
 
-        DateModifier dates = new DateModifier(date1,date2);
+        int employess = int.Parse(Console.ReadLine());
 
-        Console.WriteLine(dates.GetDifference());
+        for (int i = 0; i < employess; i++)
+        {
+            company.AddMember(Console.ReadLine());
+        }
+
+        string topDepartment = company.GetTopDepartmentBySalary();
+        company.PrintDepartment(topDepartment, "Highest Average Salary");
+
     }
 }
 
