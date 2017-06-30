@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 public class Person
@@ -32,6 +33,11 @@ public class Person
     public int Age
     {
         get { return age; }
+    }
+
+    public void Print()
+    {
+        Console.WriteLine($"{this.name} - {this.age}");
     }
 
 

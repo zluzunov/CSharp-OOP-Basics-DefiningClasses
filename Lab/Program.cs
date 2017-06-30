@@ -13,7 +13,7 @@ public class Program
             throw new Exception();
         }
 
-        Family family = new Family();
+        OpinionPoll poll = new OpinionPoll();
 
         int people = int.Parse(Console.ReadLine());
 
@@ -21,12 +21,15 @@ public class Program
         {
             var input = Console.ReadLine().Split(new []{' '},StringSplitOptions.RemoveEmptyEntries);
             Person person = new Person(input[0], int.Parse(input[1]));
-            family.AddMember(person);
+            poll.AddMember(person);
         }
 
-        Person oldest = family.GetOldestMember();
+        Person[] older = poll.GetPersonsOlderThan(30);
 
-        Console.WriteLine($"{oldest.name} {oldest.age}");
+        foreach (Person person in older)
+        {
+            person.Print();
+        }
     }
 }
 

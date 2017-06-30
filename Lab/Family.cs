@@ -3,7 +3,7 @@ using System.Linq;
 
 class Family
 {
-    private List<Person> familyMembers;
+    protected List<Person> familyMembers;
 
     public Family()
     {
