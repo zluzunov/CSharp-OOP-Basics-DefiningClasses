@@ -1,65 +1,55 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 
 public class CarPark
 {
-    private Dictionary<string, Car> Cars { get; set; }
+    public Queue<Car> Cars { get; set; }
 
     public CarPark()
     {
-        Cars = new Dictionary<string, Car>();
+        Cars = new Queue<Car>();
     }
 
     public void AddCar(Car car)
     {
-        if (!Cars.Keys.Contains(car.Model))
-        {
-            Cars[car.Model] = car;
-        }
-        else
-        {
-            throw new ArgumentException("Such model already exists!");
-        }
+        Cars.Enqueue(car);
     }
 
-    public void PrintCas()
+    public void PrintCars()
     {
-        foreach (Car car in Cars.Values)
+        foreach (Car car in Cars)
         {
             car.Print();
         }
     }
 
-    private void Drive(string carModel, decimal kilometers)
+    public void PrintCars(string command)
     {
-        if (Cars.Keys.Contains(carModel))
-        {
-            Car car = Cars[carModel];
-            decimal fuelNeeded = car.Consumption * kilometers;
+        Car[] printCollection;
 
-            if (fuelNeeded <= car.Fuel)
-            {
-                car.Fuel -= fuelNeeded;
-                car.Distance += kilometers;
-                Cars[car.Model] = car;
-            }
-            else
-            {
-                Console.WriteLine("Insufficient fuel for the drive");
-            }
-            
+        if (command == "fragile")
+        {
+            printCollection = Cars
+                .Where(c => c.Cargo.Type == command)
+                .Where(c => c.Tires.Count(t => t.Pressure < 1) > 0)
+                .ToArray();
+        }
+        else if (command == "flamable")
+        {
+            printCollection = Cars
+                .Where(c => c.Cargo.Type == command)
+                .Where(c => c.Engine.Power > 250)
+                .ToArray();
         }
         else
         {
-            throw new ArgumentException("No such model in the car park!");
+            printCollection = new Car[]{};
         }
-    }
 
-    public void Drive(string userInput)
-    {
-        string[] distanceData = userInput.Split(new[] {' '}, StringSplitOptions.RemoveEmptyEntries);
-        Drive(distanceData[1], decimal.Parse(distanceData[2]));
+        foreach (Car car in printCollection)
+        {
+            Console.WriteLine(car.Model);
+        }
     }
 }

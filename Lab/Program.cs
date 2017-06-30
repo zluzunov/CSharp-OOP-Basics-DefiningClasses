@@ -12,13 +12,9 @@ public class Program
         {
             carPark.AddCar(new Car(Console.ReadLine()));
         }
-        string track;
-        while ((track = Console.ReadLine())!= "End")
-        {
-            carPark.Drive(track);
-        }
+        string command = Console.ReadLine();
 
-        carPark.PrintCas();
+        carPark.PrintCars(command);
 
     }
 }

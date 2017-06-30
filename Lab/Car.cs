@@ -3,16 +3,40 @@ using System.Collections.Generic;
 
 public class Car
 {
-    public static HashSet<string> Models;
-
     public Car(string userInput)
     {
-        string[] carData = userInput.Split(new[] {' '}, StringSplitOptions.RemoveEmptyEntries);
+        string[] carData = userInput.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
-        this.Model = carData[0];
-        this.Fuel = decimal.Parse(carData[1]);
-        this.Consumption = decimal.Parse(carData[2]);
-        this.Distance = 0;
+        string model = carData[0];
+        Engine engine = new Engine(int.Parse(carData[1]),int.Parse(carData[2]));
+        Cargo cargo = new Cargo(int.Parse(carData[3]), carData[4]);
+        List<Tire> tires = new List<Tire>();
+
+        for (int i = 5; i < carData.Length; i += 2)
+        {
+            double pressure = double.Parse(carData[i]);
+            int age = int.Parse(carData[i+1]);
+            
+            tires.Add(new Tire(pressure, age));
+        }
+
+        this.Model = model;
+        this.Engine = engine;
+        this.Cargo = cargo;
+        this.Tires = tires;
+    }
+
+    public Car(
+        string model,
+        Engine engine,
+        Cargo cargo,
+        List<Tire> tires
+        )
+    {
+        this.Model = model;
+        this.Engine = engine;
+        this.Cargo = cargo;
+        this.Tires = tires;
     }
 
     public string Model { get; set; }
@@ -22,6 +46,13 @@ public class Car
     public decimal Consumption { get; set; }
 
     public decimal Distance { get; set; }
+
+    public Engine Engine { get; set; }
+
+    public Cargo Cargo { get; set; }
+
+    public List<Tire> Tires { get; set; }
+
 
 
     public void Print()
