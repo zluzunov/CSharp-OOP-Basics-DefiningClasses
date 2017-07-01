@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Homework01.Cars
+﻿namespace Homework01.Cars
 {
     public class Car
     {
@@ -32,6 +30,12 @@ namespace Homework01.Cars
             : this(model, engine, WeightDefault, color)
         { }
 
+        public Car(string model, decimal speed)
+        {
+            Model = model;
+            Speed = speed;
+        }
+
         public string Model { get; set; }
 
         public Engine Engine { get; set; }
@@ -40,16 +44,11 @@ namespace Homework01.Cars
 
         public string Color { get; set; }
 
+        public decimal Speed { get; set; }
+
         public override string ToString()
         {
-            string result = "";
-            string padding = "  ";
-            string weight;
-            weight = Weight != WeightDefault ? $"{Weight}": ColorDefault;
-            
-            result = $"{Model}:\n{Engine}\n{padding}Weight: {weight}\n{padding}Color: {Color}";
-
-            return result;
+            return $"{Model} {Speed}\n";
         }
     }
 }

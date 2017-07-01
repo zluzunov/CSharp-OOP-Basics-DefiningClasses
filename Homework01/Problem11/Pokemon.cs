@@ -1,6 +1,6 @@
 ﻿namespace Homework01.Problem11
 {
-    class Pokemon
+    public class Pokemon
     {
         private string name;
         private string element;
@@ -11,6 +11,12 @@
             this.name = name;
             this.element = element;
             this.health = health;
+        }
+
+        public Pokemon(string name, string type)
+        {
+            Name = name;
+            Type = type;
         }
 
         public decimal Health
@@ -31,6 +37,11 @@
             set { this.name = value; }
         }
 
-        
+        public string Type { get; set; }
+
+        public override string ToString()
+        {
+            return $"{Name} {Type}\n";
+        }
     }
 }
