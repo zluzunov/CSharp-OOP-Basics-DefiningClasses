@@ -1,39 +1,90 @@
 ﻿namespace Homework01
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
-    using Rectangles;
+    using Cars;
 
     public class Program
     {
         static void Main()
         {
-            int[] inputs = Console.ReadLine()
-                .Split(new[] {' '}, StringSplitOptions.RemoveEmptyEntries)
-                .Select(int.Parse)
-                .ToArray();
+            int enginesCount = int.Parse(Console.ReadLine());
 
-            for (int i = 0; i < inputs[0]; i++)
+            List<Engine> engines = new List<Engine>();
+            List<Car> cars = new List<Car>();
+
+            for (int i = 0; i < enginesCount; i++)
             {
-                string[] rectangle = Console.ReadLine()
-                    .Split(new[] {' '}, StringSplitOptions.RemoveEmptyEntries)
+                var engine = Console.ReadLine()
+                    .Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)
                     .ToArray();
-                Rectangle.Collection[rectangle[0]] = new Rectangle(
-                    rectangle[0],
-                    double.Parse(rectangle[1]),
-                    double.Parse(rectangle[2]),
-                    double.Parse(rectangle[3]),
-                    double.Parse(rectangle[4])
-                );
+                string model = engine[0];
+                int power = int.Parse(engine[1]);
+                string efficiency;
+                double displacement;
+                if (engine.Length == 4)
+                {
+                    efficiency = engine[3];
+                    displacement = double.Parse(engine[2]);
+                    engines.Add(new Engine(model, displacement, power, efficiency));
+                }
+                else if (engine.Length == 3)
+                {
+                    if (double.TryParse(engine[2], out displacement))
+                    {
+                        engines.Add(new Engine(model, displacement, power));
+                    }
+                    else
+                    {
+                        efficiency = engine[2];
+                        engines.Add(new Engine(model, power, efficiency));
+                    }
+                }
+                else
+                {
+                    engines.Add(new Engine(model, power));
+                }
             }
 
-            for (int i = 0; i < inputs[1]; i++)
-            {
-                string[] ids = Console.ReadLine().Split(new[] {' '}, StringSplitOptions.RemoveEmptyEntries)
-                    .ToArray();
+            int carsCount = int.Parse(Console.ReadLine());
 
-                bool result = Rectangle.Collection[ids[0]].CheckIntersect(Rectangle.Collection[ids[1]]);
-                Console.WriteLine(result.ToString().ToLower());
+            for (int i = 0; i < carsCount; i++)
+            {
+                string[] carData = Console.ReadLine()
+                    .Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+
+                string model = carData[0];
+                Engine engine = engines.FirstOrDefault(e => e.Model == carData[1]);
+                string color;
+                double weight;
+                if (carData.Length == 4)
+                {
+                    color = carData[3];
+                    weight = double.Parse(carData[2]);
+                    cars.Add(new Car(model,engine,weight,color));
+                }
+                else if (carData.Length == 3)
+                {
+                    if (double.TryParse(carData[2], out weight))
+                    {
+                        cars.Add(new Car(model, engine, weight));
+                    }
+                    else
+                    {
+                        color = carData[2];
+                        cars.Add(new Car(model, engine, color));
+                    }
+                }
+                else
+                {
+                    cars.Add(new Car(model, engine));
+                }
+            }
+
+            foreach (Car car in cars)
+            {
+                Console.WriteLine(car);
             }
         }
     }

@@ -1,0 +1,22 @@
+5 4
+Pesho 2 2 0 0
+Gosho 2 2 2 2
+Misho 2 2 4 4
+Sasho 2 2 6 6
+Shosho 2 2 8 8
+Pesho Gosho
+Pesho Misho
+Pesho Sasho
+Pesho Shosho
+
+----------
+5 4
+Pesho 2 2 0 0
+Gosho 2 2 1 1
+Misho 2 2 4 4
+Sasho 2 2 6 6
+Shosho 2 2 8 8
+Pesho Gosho
+Pesho Misho
+Pesho Sasho
+Pesho Shosho

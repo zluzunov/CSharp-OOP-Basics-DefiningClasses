@@ -16,6 +16,8 @@ namespace Homework01.Cars
         {
             Model = model;
             Engine = engine;
+            Weight = weight;
+            Color = color;
         }
 
         public Car(string model, Engine engine)
@@ -27,7 +29,7 @@ namespace Homework01.Cars
         { }
 
         public Car(string model, Engine engine, string color)
-            : this(model, engine, WeightDefault, ColorDefault)
+            : this(model, engine, WeightDefault, color)
         { }
 
         public string Model { get; set; }
@@ -38,5 +40,16 @@ namespace Homework01.Cars
 
         public string Color { get; set; }
 
+        public override string ToString()
+        {
+            string result = "";
+            string padding = "  ";
+            string weight;
+            weight = Weight != WeightDefault ? $"{Weight}": ColorDefault;
+            
+            result = $"{Model}:\n{Engine}\n{padding}Weight: {weight}\n{padding}Color: {Color}";
+
+            return result;
+        }
     }
 }
