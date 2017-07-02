@@ -1,18 +1,23 @@
 ﻿namespace Homework01.Rectangles
 {
+    using System;
     using System.Collections.Generic;
+    using System.Text;
 
     public class Rectangle
     {
+        protected const char Vertical = '|';
+        protected const char Horizontal = '-';
+
         private string _id;
-        private double _width;
-        private double _height;
+        private int _width;
+        private int _height;
         private double _x;
         private double _y;
 
         public static Dictionary<string, Rectangle> Collection = new Dictionary<string, Rectangle>();
 
-        public Rectangle(string id, double width, double height, double x, double y)
+        public Rectangle(string id, int width, int height, double x, double y)
         {
             Id = id;
             X = x;
@@ -21,13 +26,13 @@
             Height = height;
         }
 
-        public double Width
+        public int Width
         {
             get { return _width; }
             set { _width = value; }
         }
 
-        public double Height
+        public int Height
         {
             get { return _height; }
             set { _height = value; }
@@ -85,6 +90,54 @@
             bool intersect = overlapHorizontally && overlapVertically;
 
             return intersect;
+        }
+
+        public void Draw()
+        {
+            var rectangleString = new StringBuilder();
+
+            rectangleString.Append(GetFirstLast());
+
+            for (int i = 0; i < Height-2; i++)
+            {
+                rectangleString.Append(GetRow());
+            }
+
+            rectangleString.Append(GetFirstLast());
+
+            Console.Write(rectangleString);
+        }
+
+        private string GetRow()
+        {
+            var currentRow = new StringBuilder();
+            currentRow.Append(Vertical);
+            int spaces = Width;
+            for (int i = 0; i < spaces; i++)
+            {
+                currentRow.Append(' ');
+            }
+
+            currentRow.Append(Vertical);
+            currentRow.Append('\n');
+
+            return currentRow.ToString();
+        }
+
+        private string GetFirstLast()
+        {
+            var currentRow = new StringBuilder();
+
+            currentRow.Append(Vertical);
+
+            for (int i = 0; i < Width; i++)
+            {
+                currentRow.Append(new char[] { Horizontal });
+            }
+
+            currentRow.Append(new char[] {Vertical, '\n'});
+
+            return currentRow.ToString();
         }
     }
 }

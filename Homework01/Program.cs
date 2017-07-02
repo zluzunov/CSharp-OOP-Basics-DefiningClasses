@@ -1,40 +1,29 @@
 ﻿namespace Homework01
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using Problem14;
+    using Rectangles;
 
     public class Program
     {
         static void Main()
         {
-            string line;
-            string endCommand = "End";
+            string shapeName = Console.ReadLine();
 
-            List<Cat> cats = new List<Cat>();
-
-            while ((line = Console.ReadLine()) != endCommand)
+            if (shapeName == "Square")
             {
-                string[] catData = line.Split(new []{' '},StringSplitOptions.RemoveEmptyEntries);
-
-                string breed = catData[0];
-                string name = catData[1];
-                decimal property = decimal.Parse(catData[2]);
-
-                if (breed == "Cymric")
-                {
-                    cats.Add(new CatCymric(breed,name,property));
-                }
-                else
-                {
-                    cats.Add(new Cat(breed, name, property));
-                }
+                int side = int.Parse(Console.ReadLine());
+                Square shape = new Square(side);
+                shape.Draw();
             }
-            string targetCatName = Console.ReadLine();
+            else
+            {
+                int width = int.Parse(Console.ReadLine());
+                int height = int.Parse(Console.ReadLine());
 
-            Console.WriteLine(cats.FirstOrDefault(c => c.Name == targetCatName));
+                Rectangle shape = new Rectangle("",width,height,0,0);
 
+                shape.Draw();
+            }
         }
     }
 

@@ -54,17 +54,18 @@
     <Compile Include="Problem11\Trainer.cs" />
     <Compile Include="Problem14\Cat.cs" />
     <Compile Include="Problem14\CatCymric.cs" />
+    <Compile Include="Problem15\CorDraw.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Cars\Tire.cs" />
     <Compile Include="Rectangles\Rectangle.cs" />
+    <Compile Include="Rectangles\Square.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Problem12\" />
-    <Folder Include="Problem15\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
