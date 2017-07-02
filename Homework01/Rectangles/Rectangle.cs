@@ -14,11 +14,11 @@
 
         public Rectangle(string id, double width, double height, double x, double y)
         {
-            this.Id = id;
-            this.X = x;
-            this.Y = y;
-            this.Width = width;
-            this.Height = height;
+            Id = id;
+            X = x;
+            Y = y;
+            Width = width;
+            Height = height;
         }
 
         public double Width
@@ -61,24 +61,30 @@
             return _y + _height;
         }
 
-        public bool CheckHorizontal(double x, double x1)
+        public bool OverlapHorizontally(double otherX, double otherX1)
         {
-            bool result = (x >= this.X && x < GetX1()) || (x1 >= this.X && x1 <= this.GetX1());
+
+
+            bool result = !(X > otherX1 || otherX > GetX1());
 
             return result;
         }
 
-        public bool CheckVertical(double y, double y1)
+        public bool OverlapVertically(double otherY, double otherY1)
         {
-            bool result = (y >= this.Y && y1 <= GetY1()) || (y1 >= this.Y && y1 <= this.GetY1());
+            bool result = !(Y > otherY1 || otherY > GetY1());
 
             return result;
         }
 
         public bool CheckIntersect(Rectangle rectangle)
         {
-            return CheckHorizontal(rectangle.X, rectangle.GetX1()) &&
-                CheckVertical(rectangle.Y, rectangle.GetY1());
+            bool overlapHorizontally = OverlapHorizontally(rectangle.X, rectangle.GetX1());
+            bool overlapVertically = OverlapVertically(rectangle.Y, rectangle.GetY1());
+
+            bool intersect = overlapHorizontally && overlapVertically;
+
+            return intersect;
         }
     }
 }

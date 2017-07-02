@@ -1,105 +1,44 @@
 ﻿namespace Homework01
 {
     using System;
-    using System.Collections.Generic;
     using System.Linq;
-    using Problem13;
+    using Rectangles;
 
     public class Program
     {
         static void Main()
         {
-            string endCommand = "End";
+            int[] inputs = Console.ReadLine()
+                .Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)
+                .Select(int.Parse)
+                .ToArray();
 
-            List<string[]> relations = new List<string[]>();
-            List<Person> people = new List<Person>();
-
-            char[] delimiters = { ' ', '-' };
-
-            string line = Console.ReadLine();
-            string targetPersonId = line;
-
-            //collect people and their relations
-            while ((line = Console.ReadLine()) != endCommand)
+            for (int i = 0; i < inputs[0]; i++)
             {
-                string[] lineData = line.Split(delimiters, StringSplitOptions.RemoveEmptyEntries);
-
-                if (line.Contains("-"))
-                {
-                    string[] commandPair = GetRelations(lineData);
-                    relations.Add(commandPair);
-                }
-                else
-                {
-                    people.Add(new Person(lineData));
-                }
+                string[] rectangle = Console.ReadLine()
+                    .Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)
+                    .ToArray();
+                Rectangle.Collection[rectangle[0]] = new Rectangle(
+                    rectangle[0],
+                    double.Parse(rectangle[1]),
+                    double.Parse(rectangle[2]),
+                    double.Parse(rectangle[3]),
+                    double.Parse(rectangle[4])
+                );
             }
 
-            //get the target person
-            Person targetPerson = people
-                .FirstOrDefault(p => p.Name() == targetPersonId || p.BirthDate == targetPersonId);
-
-            //get the IDs of targetPerson parents
-            string[] parents = relations
-                .Where(r => r[1] == targetPerson.Name() || r[1] == targetPerson.BirthDate)
-                .Select(r => r[0]).ToArray();
-            
-            //Add parents
-            targetPerson.Parents = people
-                .Where(p => parents.Contains(p.Name()) || parents.Contains(p.BirthDate))
-                .ToList();
-
-            //get the IDs of targetPerson children
-            string[] children = relations
-                .Where(r => r[0] == targetPerson.Name() || r[0] == targetPerson.BirthDate)
-                .Select(r => r[1]).ToArray();
-
-            //Add children
-            targetPerson.Children = people
-                .Where(p => children.Contains(p.Name()) || children.Contains(p.BirthDate))
-                .ToList();
-
-            //print target person tree
-            targetPerson.PrintTree();
-        }
-
-        public static string[] GetRelations(string[] line)
-        {
-            string[] result;
-
-            if (line.Length == 4)
+            for (int i = 0; i < inputs[1]; i++)
             {
-                //name - name
-                result = new[] { $"{line[0]} {line[1]}", $"{line[2]} {line[3]}" };
-            }
-            else if (line.Length == 3)
-            {
-                if (line[0].Contains("/"))
-                {
-                    //date - name
-                    result = new[] { line[0], $"{line[1]} {line[2]}" };
-                }
-                else
-                {
-                    //name - date
-                    result = new[] { $"{line[0]} {line[1]}", line[2] };
-                }
-            }
-            else if (line.Length == 2)
-            {
-                //date - date
-                result = new[] { line[0], line[1] };
-            }
-            else
-            {
-                result = new string[] { };
-            }
+                string[] ids = Console.ReadLine().Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)
+                    .ToArray();
 
-            return result;
+                Rectangle rectangleOne = Rectangle.Collection[ids[0]];
+                Rectangle rectangleTwo = Rectangle.Collection[ids[1]];
+
+                bool result = rectangleOne.CheckIntersect(rectangleTwo);
+                Console.WriteLine(result.ToString().ToLower());
+            }
         }
     }
+
 }
-
-
-
-

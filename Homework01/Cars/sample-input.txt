@@ -1,21 +1,16 @@
-2
-V8-101 220 50
-V4-33 140 28 B
-3
-FordFocus V4-33 1300 Silver
-FordMustang V8-101
-VolkswagenGolf V4-33 Orange
+2 1
+Pesho 2 2 0 0
+Gosho 2 2 0 0
+Pesho Gosho
 
 
-------------
-
-4
-DSL-10 280 B
-V7-55 200 35
-DSL-13 305 55 A+
-V7-54 190 30 D
-4
-FordMondeo DSL-13 Purple
-VolkswagenPolo V7-54 1200 Yellow
-VolkswagenPassat DSL-10 1375 Blue
-FordFusion DSL-13
+5 4
+Pesho 2 2 0 0
+Gosho 2 2 0 0
+Tosho 2 2 1 1
+Bosho 2 2 2 2
+Cosho 2 2 2.1 2.1
+Pesho Gosho
+Pesho Tosho
+Pesho Bosho
+Pesho Cosho
