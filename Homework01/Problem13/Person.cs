@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
 
     public class Person
     {
@@ -18,44 +17,11 @@
             FirstName = firstName;
             LastName = lastName;
             BirthDate = birthDate;
-            Parents = new List<Person>();
-            Children = new List<Person>();
-        }
-
-        public Person(string startString)
-        {
-            if (startString.Contains("/"))
-            {
-                BirthDate = startString;
-            }
-            else
-            {
-                string[] names = startString.Split(new[] {' '}, StringSplitOptions.RemoveEmptyEntries);
-                FirstName = names[0];
-                LastName = names[1];
-            }
-            
-            Parents = new List<Person>();
-            Children = new List<Person>();
-        }
-
-        public Person(string firstName, string lastName)
-        {
-            FirstName = firstName;
-            LastName = lastName;
-            Parents = new List<Person>();
-            Children = new List<Person>();
         }
 
         public Person(string[] personData)
-        {
-            FirstName = personData[0];
-            LastName = personData[1];
-            BirthDate = personData[2];
-
-            Parents = new List<Person>();
-            Children = new List<Person>();
-        }
+            :this(personData[0], personData[1], personData[2])
+        {}
 
         public string Name()
         {
@@ -64,39 +30,6 @@
             if (FirstName != null && LastName != null)
             {
                 result = $"{FirstName} {LastName}";
-            }
-
-            return result;
-        }
-
-        public Person GetTreeMember(string searchString)
-        {
-            Person result = GetByBirthdate(searchString);
-            if (result == null)
-            {
-                result = GetByName(searchString);
-            }
-
-            return result;
-        }
-
-        private Person GetByBirthdate(string birthDate)
-        {
-            Person result = Parents.FirstOrDefault(p => p.BirthDate == birthDate);
-            if (result == null)
-            {
-                result = Children.FirstOrDefault(p => p.BirthDate == birthDate);
-            }
-
-            return result;
-        }
-
-        private Person GetByName(string name)
-        {
-            Person result = Parents.FirstOrDefault(p => p.Name() == name);
-            if (result == null)
-            {
-                result = Children.FirstOrDefault(p => p.Name() == name);
             }
 
             return result;

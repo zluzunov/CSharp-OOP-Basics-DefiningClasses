@@ -49,7 +49,6 @@
     <Compile Include="Cars\CarPark.cs" />
     <Compile Include="Date\DateModifier.cs" />
     <Compile Include="Cars\Engine.cs" />
-    <Compile Include="Problem13\Name.cs" />
     <Compile Include="Problem13\Person.cs" />
     <Compile Include="Problem11\Pokemon.cs" />
     <Compile Include="Problem11\Trainer.cs" />
