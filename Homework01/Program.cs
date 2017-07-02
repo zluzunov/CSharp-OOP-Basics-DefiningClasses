@@ -1,43 +1,40 @@
 ﻿namespace Homework01
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
-    using Rectangles;
+    using Problem14;
 
     public class Program
     {
         static void Main()
         {
-            int[] inputs = Console.ReadLine()
-                .Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)
-                .Select(int.Parse)
-                .ToArray();
+            string line;
+            string endCommand = "End";
 
-            for (int i = 0; i < inputs[0]; i++)
+            List<Cat> cats = new List<Cat>();
+
+            while ((line = Console.ReadLine()) != endCommand)
             {
-                string[] rectangle = Console.ReadLine()
-                    .Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)
-                    .ToArray();
-                Rectangle.Collection[rectangle[0]] = new Rectangle(
-                    rectangle[0],
-                    double.Parse(rectangle[1]),
-                    double.Parse(rectangle[2]),
-                    double.Parse(rectangle[3]),
-                    double.Parse(rectangle[4])
-                );
+                string[] catData = line.Split(new []{' '},StringSplitOptions.RemoveEmptyEntries);
+
+                string breed = catData[0];
+                string name = catData[1];
+                decimal property = decimal.Parse(catData[2]);
+
+                if (breed == "Cymric")
+                {
+                    cats.Add(new CatCymric(breed,name,property));
+                }
+                else
+                {
+                    cats.Add(new Cat(breed, name, property));
+                }
             }
+            string targetCatName = Console.ReadLine();
 
-            for (int i = 0; i < inputs[1]; i++)
-            {
-                string[] ids = Console.ReadLine().Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)
-                    .ToArray();
+            Console.WriteLine(cats.FirstOrDefault(c => c.Name == targetCatName));
 
-                Rectangle rectangleOne = Rectangle.Collection[ids[0]];
-                Rectangle rectangleTwo = Rectangle.Collection[ids[1]];
-
-                bool result = rectangleOne.CheckIntersect(rectangleTwo);
-                Console.WriteLine(result.ToString().ToLower());
-            }
         }
     }
 
