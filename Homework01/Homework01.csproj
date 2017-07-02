@@ -47,13 +47,10 @@
     <Compile Include="Cars\Car.cs" />
     <Compile Include="Cars\Cargo.cs" />
     <Compile Include="Cars\CarPark.cs" />
-    <Compile Include="Company\Company.cs" />
     <Compile Include="Date\DateModifier.cs" />
-    <Compile Include="Company\Employee.cs" />
     <Compile Include="Cars\Engine.cs" />
-    <Compile Include="Company\Family.cs" />
-    <Compile Include="Company\OpinionPoll.cs" />
-    <Compile Include="Company\Person.cs" />
+    <Compile Include="Problem13\Name.cs" />
+    <Compile Include="Problem13\Person.cs" />
     <Compile Include="Problem11\Pokemon.cs" />
     <Compile Include="Problem11\Trainer.cs" />
     <Compile Include="Program.cs" />
@@ -66,7 +63,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Problem12\" />
-    <Folder Include="Problem13\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
